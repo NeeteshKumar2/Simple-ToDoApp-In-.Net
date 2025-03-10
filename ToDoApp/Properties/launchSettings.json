@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ToDoApp": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
