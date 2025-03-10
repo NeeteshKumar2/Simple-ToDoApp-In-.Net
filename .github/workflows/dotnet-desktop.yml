@@ -22,7 +22,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0.x' # Specify your .NET version
+        dotnet-version: '8.0.x' # Specify your .NET version
 
     # Restore dependencies
     - name: Restore Dependencies
@@ -36,9 +36,8 @@ jobs:
     - name: Publish Application
       run: dotnet publish --configuration Release --output ./output
 
-    # Archive and upload the artifact
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.1
       with:
-        name: ToDoApp
-        path: ./output
+        name: BuildArtifact # Name of the artifact
+        path: ./output # Path to the folder or files to upload
