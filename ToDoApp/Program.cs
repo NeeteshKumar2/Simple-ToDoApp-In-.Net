@@ -11,38 +11,33 @@ namespace ToDoApp
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Console To-Do App!");
-            bool exit = false;
 
-            while (!exit)
+            Console.WriteLine("\nChoose an option:");
+            Console.WriteLine("1. Add a Task");
+            Console.WriteLine("2. View Tasks");
+            Console.WriteLine("3. Delete a Task");
+            Console.WriteLine("4. Exit");
+            Console.Write("Enter your choice: ");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
             {
-                Console.WriteLine("\nChoose an option:");
-                Console.WriteLine("1. Add a Task");
-                Console.WriteLine("2. View Tasks");
-                Console.WriteLine("3. Delete a Task");
-                Console.WriteLine("4. Exit");
-                Console.Write("Enter your choice: ");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        AddTask();
-                        break;
-                    case "2":
-                        ViewTasks();
-                        break;
-                    case "3":
-                        DeleteTask();
-                        break;
-                    case "4":
-                        exit = true;
-                        Console.WriteLine("Exiting the app. Have a productive day!");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice. Please try again.");
-                        break;
-                }
+                case "1":
+                    AddTask();
+                    break;
+                case "2":
+                    ViewTasks();
+                    break;
+                case "3":
+                    DeleteTask();
+                    break;
+                case "4":
+                    Console.WriteLine("Exiting the app. Have a productive day!");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
             }
         }
 
