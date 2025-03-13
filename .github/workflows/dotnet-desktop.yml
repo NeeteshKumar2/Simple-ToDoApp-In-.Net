@@ -26,7 +26,7 @@ jobs:
 
     # Restore dependencies
     - name: Restore Dependencies
-      run: dotnet restore
+      run: dotnet restore ./ToDoApp/ToDoApp.csproj
 
     # Build the application
     - name: Build Application
