@@ -13,21 +13,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
     # Checkout the repository
     - name: Checkout Code
       uses: actions/checkout@v3
       with:
        fetch-depth: 0
 
-    - name: Get Changed Files and Save to File
-      run: |
-        echo "📁 Changed files in commit $GITHUB_SHA:"
-        git show --pretty="" --name-only $GITHUB_SHA > changed_files.txt
-        cat changed_files.txt  # Optional: print in log
+    # Build the application
+    - name: Build Application
+      run: dotnet build ./ToDoApp/ToDoApp.csproj --configuration Release
     
-    - name: Upload Changed Files List as Artifact
+    # Publish the application
+    - name: Publish Application
+      run: dotnet publish ./ToDoApp/ToDoApp.csproj --configuration Release --output ./output
+    
+    # Get changed files and save to output directory
+    - name: Save Changed Files to Output Folder
+      run: |
+        echo "📁 Changed files in commit $GITHUB_SHA:"  ./output/changed_files.txt
+        git show --pretty="" --name-only $GITHUB_SHA > ./output/changed_files.txt
+        cat ./output/changed_files.txt
+    
+    # Upload all build output including changed file list
+    - name: Upload Build Artifact with Changed Files
       uses: actions/upload-artifact@v4
       with:
-        name: changed-files
-        path: changed_files.txt
+        name: BuildArtifact
+        path: ./output
+
