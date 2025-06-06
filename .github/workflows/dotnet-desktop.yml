@@ -22,8 +22,8 @@ jobs:
 
     - name: Get Changed Files and Save to File
       run: |
-        echo "📁 Changed files in commit $GITHUB_SHA:" > changed_files.txt
-        git show --pretty="" --name-only $GITHUB_SHA >> changed_files.txt
+        echo "📁 Changed files in commit $GITHUB_SHA:"
+        git show --pretty="" --name-only $GITHUB_SHA > changed_files.txt
         cat changed_files.txt  # Optional: print in log
     
     - name: Upload Changed Files List as Artifact
