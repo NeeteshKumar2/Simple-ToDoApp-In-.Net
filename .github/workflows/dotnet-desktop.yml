@@ -13,41 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     # Checkout the repository
     - name: Checkout Code
       uses: actions/checkout@v3
-
-    # Install .NET SDK
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x' # Specify your .NET version
+       fetch-depth: 0
 
-    # Restore dependencies
-    - name: Restore Dependencies
-      run: dotnet restore ./ToDoApp/ToDoApp.csproj
-
-    - name: Display Build Info
+    - name: Get Changed Files from Commit
       run: |
-        echo "Run ID: $GITHUB_RUN_ID"
-        echo "Commit SHA: $GITHUB_SHA"
-
-    - name: Get Changed Files in Commit
-      run: |
-        echo "Files changed in commit $GITHUB_SHA:"
-        git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
-
-
-    # Build the application
-    - name: Build Application
-      run: dotnet build ./ToDoApp/ToDoApp.csproj --configuration Release
-
-    # Publish the application
-    - name: Publish Application
-      run: dotnet publish ./ToDoApp/ToDoApp.csproj --configuration Release --output ./output
-
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v4.6.1
-      with:
-        name: BuildArtifact # Name of the artifact
-        path: ./output # Path to the folder or files to upload
+       echo "🔍 Commit SHA: $GITHUB_SHA"
+       echo "📁 Changed files:"
+       git show --pretty="" --name-only $GITHUB_SHA
