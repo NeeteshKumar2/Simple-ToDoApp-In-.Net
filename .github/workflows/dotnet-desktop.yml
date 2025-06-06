@@ -32,6 +32,12 @@ jobs:
         echo "Run ID: $GITHUB_RUN_ID"
         echo "Commit SHA: $GITHUB_SHA"
 
+    - name: Get Changed Files in Commit
+      run: |
+        echo "Files changed in commit $GITHUB_SHA:"
+        git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
+
+
     # Build the application
     - name: Build Application
       run: dotnet build ./ToDoApp/ToDoApp.csproj --configuration Release
