@@ -1,4 +1,3 @@
-name: .NET CI/CD Pipeline
 
 on:
   push:
@@ -27,6 +26,11 @@ jobs:
     # Restore dependencies
     - name: Restore Dependencies
       run: dotnet restore ./ToDoApp/ToDoApp.csproj
+
+    - name: Display Build Info
+      run: |
+        echo "Run ID: $GITHUB_RUN_ID"
+        echo "Commit SHA: $GITHUB_SHA"
 
     # Build the application
     - name: Build Application
